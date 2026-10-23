@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>叁竹培训 | 管理驾驶舱</title>
+    <title>叁竹教育 | 教育培训驾驶舱</title>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -47,17 +47,12 @@
             min-height: 100vh; background-attachment: fixed;
         }
         .dashboard-container { max-width: 1800px; margin: 0 auto; }
-        .header { margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
-        .title-section h1 { font-size: 1.9rem; font-weight: 600; background: linear-gradient(135deg, #2b6e3c, #1f8a4c); -webkit-background-clip: text; background-clip: text; color: transparent; display: flex; align-items: center; gap: 10px; }
-        .title-section p { color: #475569; margin-top: 6px; font-size: 0.9rem; }
-        .date-badge { background: white; padding: 8px 20px; border-radius: 40px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); font-weight: 500; color: #2c6e3c; display: flex; align-items: center; gap: 8px; }
-        .platform-entries { display: flex; gap: 12px; align-items: center; }
-        .platform-entry { display: inline-flex; align-items: center; gap: 6px; background: white; padding: 8px 16px; border-radius: 40px; box-shadow: var(--shadow-sm); font-weight: 500; color: var(--primary-700); text-decoration: none; transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid var(--neutral-200); position: relative; overflow: hidden; }
-        .platform-entry::after { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255, 255, 255, 0.4); border-radius: 50%; transform: translate(-50%, -50%); transition: width var(--transition-slow), height var(--transition-slow); }
-        .platform-entry:active::after { width: 200%; height: 200%; }
-        .platform-entry:hover { background: var(--primary-700); color: white; border-color: var(--primary-700); transform: translateY(-2px) scale(1.02); box-shadow: var(--shadow-lg); }
-        .platform-entry i { font-size: 0.9rem; transition: transform var(--transition-fast); }
-        .platform-entry:hover i { transform: scale(1.1); }
+        .header { margin-bottom: 24px; display: flex; justify-content: center; align-items: center; position: relative; }
+        .title-section { text-align: center; }
+        .title-section h1 { font-size: 1.9rem; font-weight: 600; background: linear-gradient(135deg, #2b6e3c, #1f8a4c); -webkit-background-clip: text; background-clip: text; color: transparent; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .title-section p { color: #475569; margin-top: 6px; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .title-section p i { color: var(--primary-600); font-size: 0.8rem; }
+        .date-badge { background: white; padding: 8px 20px; border-radius: 40px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); font-weight: 500; color: #2c6e3c; display: flex; align-items: center; gap: 8px; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
         .card { background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); padding: var(--spacing-md); border: 1px solid rgba(255, 255, 255, 0.8); transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
         .card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: left var(--transition-slow); }
         .card:hover::before { left: 100%; }
@@ -110,9 +105,14 @@
         .center-map-card { display: flex; flex-direction: column; padding: var(--spacing-md); position: relative; height: 560px; }
         .card-section { display: flex; flex-direction: column; gap: var(--spacing-md); }
         #chinaMap { width: 100%; height: 400px; border-radius: var(--radius-xl); }
+        .map-legend { position: absolute; left: var(--spacing-md); bottom: var(--spacing-md); z-index: 5; display: flex; flex-direction: column; gap: 6px; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid var(--neutral-200); border-radius: var(--radius-md); padding: 8px 12px; box-shadow: var(--shadow-sm); }
+        .map-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--neutral-600); font-weight: 500; }
+        .map-legend-dot { width: 12px; height: 12px; border-radius: 50%; flex: none; }
+        .map-legend-dot.hq { background: #dc2626; box-shadow: 0 0 0 2px #fff, 0 0 6px rgba(220, 38, 38, 0.6); }
+        .map-legend-dot.branch { background: #22c55e; box-shadow: 0 0 0 2px #fff, 0 0 6px rgba(34, 197, 94, 0.6); }
         .chart-box { width: 100%; height: 240px; }
         .side-card .chart-box { height: 200px; }
-        .enroll-content { position: relative; height: 160px; flex: none; display: flex; flex-direction: column; overflow: hidden; }
+        .enroll-content { position: relative; height: 245px; flex: none; display: flex; flex-direction: column; overflow: hidden; }
         .enroll-scroll-wrapper { width: 100%; height: 100%; overflow-y: auto; position: relative; padding-right: var(--spacing-xs); }
         .enroll-scroll-wrapper::-webkit-scrollbar { width: 4px; }
         .enroll-scroll-wrapper::-webkit-scrollbar-track { background: var(--neutral-100); border-radius: var(--radius-full); }
@@ -209,15 +209,10 @@
 <div class="dashboard-container">
     <div class="header">
         <div class="title-section">
-            <h1><i class="fas fa-graduation-cap" style="color:#2b6e3c;"></i> 叁竹培训管理驾驶舱</h1>
-            <p>一站式培训管理 | 数据驱动决策 | 智慧赋能教育</p>
+            <h1><i class="fas fa-graduation-cap" style="color:#2b6e3c;"></i> 叁竹教育培训驾驶舱</h1>
+            <p><i class="fas fa-chart-line"></i> 一站式培训管理 <i class="fas fa-circle" style="font-size:0.35rem;"></i> <i class="fas fa-bullseye"></i> 数据驱动决策 <i class="fas fa-circle" style="font-size:0.35rem;"></i> <i class="fas fa-microchip-ai"></i> 智慧赋能教育</p>
         </div>
-        <div class="platform-entries">
-            <a href="../website/eldercare/login.html" class="platform-entry" title="进入学员网站端"><i class="fas fa-globe"></i> 学员网站端</a>
-            <a href="../mobile/eldercare/login.html" class="platform-entry" title="进入学员移动端"><i class="fas fa-mobile-alt"></i> 学员移动端</a>
-            <a href="../backhand/eldercare/login.html" class="platform-entry" title="进入后台管理端"><i class="fas fa-cog"></i> 后台管理端</a>
-            <div class="date-badge" id="dateBadge"><i class="far fa-calendar-alt"></i> <span id="currentDate">2026年5月29日</span></div>
-        </div>
+        <div class="date-badge" id="dateBadge"><i class="far fa-calendar-alt"></i> <span id="currentDate">2026年10月23日</span></div>
     </div>
 
     <div class="kpi-grid" id="kpiContainer"></div>
@@ -242,6 +237,7 @@
             <div class="card center-map-card">
                 <div class="card-header"><span><i class="fas fa-map"></i> 分支机构分布</span><span style="font-size:0.8rem;color:#64748b;">全国布局</span></div>
                 <div id="chinaMap"></div>
+                <div class="map-legend" id="mapLegend"></div>
             </div>
             <div class="card side-card">
                 <div class="card-header"><span><i class="fas fa-user-plus"></i> 学员报名动态</span></div>
@@ -286,7 +282,7 @@
     </div>
 
     <div class="footer-note">
-        数据更新时间: <span id="updateTime">2026-05-29 14:30:00</span> | 叁竹培训在线学习平台 | 版权所有
+        数据更新时间: <span id="updateTime">2026-10-23 14:30:00</span> | 叁竹培训在线学习平台 | 版权所有
     </div>
 </div>
 
@@ -328,8 +324,8 @@
         // KPI 静态基准值（部分KPI如学员总数由下方数据源动态计算）
         kpiData: {
             institutions: 112, subInstitutionCount: 7, totalStudents: 5236,
-            totalCourses: 17, totalTeachers: 87, totalOrders: 3856,
-            totalAmount: 2856000, examPassRate: 92.5, questionBankCount: 32580,
+            totalCourses: 393, totalTeachers: 126, totalOrders: 7650,
+            totalAmount: 5338000, examPassRate: 95.3, questionBankCount: 82580,
             certificates: 4856
         },
 
@@ -349,8 +345,13 @@
 
         // ==================== 10. 机构人员分布 ====================
         staffDistributionData: [
-            { name: '讲师', value: 87 }, { name: '管理员', value: 8 },
-            { name: '客服', value: 3 }, { name: '运营', value: 12 }, { name: '其他', value: 4 }
+            { name: '讲师', value: 126 }, { name: '管理员', value: 28 },
+            { name: '客服', value: 16 }, { name: '运营', value: 24 }, { name: '其他', value: 14 }
+        ],
+        teacherDistribution: [
+            { name: '养老护理员', teachers: 42 }, { name: '老年人能力评估师', teachers: 24 },
+            { name: '健康照护师', teachers: 22 }, { name: '长期照护师', teachers: 20 },
+            { name: '养老院长特修', teachers: 11 }, { name: '医疗护理员', teachers: 7 }
         ],
         departmentData: [
             { name: '教学部', value: 12 }, { name: '运营部', value: 5 },
@@ -361,138 +362,172 @@
         // ==================== 11. 课程分布 ====================
         courseCategories: [
             { name: '养老护理员', value: 98, students: 2450, rate: 96 },
-            { name: '老年人评估师', value: 65, students: 1890, rate: 95 },
-            { name: '健康照护师', value: 58, students: 1560, rate: 94 },
-            { name: '营养配餐员', value: 42, students: 1120, rate: 92 },
-            { name: '其他课程', value: 25, students: 680, rate: 90 }
+            { name: '健康照护师', value: 76, students: 1890, rate: 95 },
+            { name: '老年人能力评估师', value: 82, students: 2060, rate: 94 },
+            { name: '长期照护师', value: 85, students: 1980, rate: 93 },
+            { name: '养老院长特修', value: 31, students: 720, rate: 92 },
+            { name: '医疗护理员', value: 21, students: 560, rate: 91 }
         ],
         // 热销课程 Top5
         hotCourses: [
             { name: '养老护理员基础课程', students: 1256, revenue: 89920 },
             { name: '老年人能力评估师', students: 892, revenue: 133800 },
             { name: '健康照护师进阶', students: 756, revenue: 68040 },
-            { name: '营养配餐员专业', students: 543, revenue: 48870 },
+            { name: '长期照护师专业', students: 543, revenue: 48870 },
             { name: '养老机构管理实务', students: 428, revenue: 51360 }
         ],
 
         // ==================== 12. 订单趋势 ====================
         monthlyOrders: [
-            { month: '1月', orders: 520, amount: 386000 },
-            { month: '2月', orders: 410, amount: 302000 },
-            { month: '3月', orders: 580, amount: 428000 },
-            { month: '4月', orders: 680, amount: 501000 },
-            { month: '5月', orders: 760, amount: 562000 },
-            { month: '6月', orders: 906, amount: 677000 }
+            { month: '3月', orders: 620, amount: 428000 },
+            { month: '4月', orders: 705, amount: 486000 },
+            { month: '5月', orders: 812, amount: 562000 },
+            { month: '6月', orders: 935, amount: 648000 },
+            { month: '7月', orders: 1080, amount: 748000 },
+            { month: '8月', orders: 1196, amount: 828000 },
+            { month: '9月', orders: 1124, amount: 782000 },
+            { month: '10月', orders: 1178, amount: 856000 }
         ],
 
         // ==================== 13. 订单动态 ====================
         orderDynamicList: [
-            { title: '养老护理员专业课程', orderNo: 'OD20260529001', name: '张三', city: '北京市', amount: 1280, status: 'paid' },
-            { title: '健康照护师题库', orderNo: 'OD20260529002', name: '李四', city: '上海市', amount: 299, status: 'paid' },
-            { title: '老年人评估师课程', orderNo: 'OD20260529003', name: '王五', city: '广东省', amount: 1500, status: 'pending' },
-            { title: '营养配餐员课程', orderNo: 'OD20260529004', name: '赵六', city: '四川省', amount: 980, status: 'refund' },
-            { title: '养老护理员题库+课程套餐', orderNo: 'OD20260529005', name: '孙七', city: '湖北省', amount: 1480, status: 'paid' },
-            { title: '养老护理员基础课程', orderNo: 'OD20260529006', name: '周八', city: '天津市', amount: 780, status: 'paid' },
-            { title: '老年人评估师题库', orderNo: 'OD20260529007', name: '吴九', city: '江苏省', amount: 399, status: 'pending' },
-            { title: '健康照护师进阶课程', orderNo: 'OD20260529008', name: '郑十', city: '浙江省', amount: 1180, status: 'paid' }
+            { title: '养老护理员专业课程', orderNo: 'OD20261023001', name: '张三', city: '长沙市', amount: 1280, status: 'paid' },
+            { title: '健康照护师题库', orderNo: 'OD20261023002', name: '李四', city: '郴州市', amount: 299, status: 'paid' },
+            { title: '老年人能力评估师课程', orderNo: 'OD20261022003', name: '王五', city: '益阳市', amount: 1500, status: 'pending' },
+            { title: '长期照护师课程', orderNo: 'OD20261022004', name: '赵六', city: '株洲市', amount: 980, status: 'refund' },
+            { title: '养老护理员题库+课程套餐', orderNo: 'OD20261021005', name: '孙七', city: '衡阳市', amount: 1480, status: 'paid' },
+            { title: '养老护理员基础课程', orderNo: 'OD20261021006', name: '周八', city: '岳阳市', amount: 780, status: 'paid' },
+            { title: '老年人能力评估师题库', orderNo: 'OD20261020007', name: '吴九', city: '常德市', amount: 399, status: 'pending' },
+            { title: '健康照护师进阶课程', orderNo: 'OD20261020008', name: '郑十', city: '邵阳市', amount: 1180, status: 'paid' }
         ],
         orderTypeData: [
-            { type: '养老护理员', orders: 1256, amount: 899000, ratio: 31.5 },
-            { type: '老年人评估师', orders: 892, amount: 1338000, ratio: 46.8 },
-            { type: '健康照护师', orders: 876, amount: 438000, ratio: 15.3 },
-            { type: '营养配餐员', orders: 832, amount: 181000, ratio: 6.4 }
+            { type: '养老护理员', orders: 2410, amount: 1681000, ratio: 31.5 },
+            { type: '老年人能力评估师', orders: 3580, amount: 2498000, ratio: 46.8 },
+            { type: '健康照护师', orders: 1170, amount: 817000, ratio: 15.3 },
+            { type: '长期照护师', orders: 490, amount: 342000, ratio: 6.4 }
         ],
 
         // ==================== 14. 分支机构分布 ====================
+        // 学员分布口径（总学员 81,820 人）：湖南 41,728 人占 51.0%，江西 16,364 人占 20.0%，其他省份 23,728 人占 29.0%
+        headquarters: { orgName: '叁竹培训总部', city: '长沙', province: '湖南省', value: 1057, students: 15860, lat: 28.23, lng: 112.94 },
         mapData: [
-            { name: '北京', value: 850, students: 12560, lat: 39.92, lng: 116.46 },
-            { name: '上海', value: 720, students: 10800, lat: 31.22, lng: 121.48 },
-            { name: '广州', value: 680, students: 9560, lat: 23.16, lng: 113.23 },
-            { name: '深圳', value: 560, students: 8600, lat: 22.62, lng: 114.07 },
-            { name: '成都', value: 480, students: 7200, lat: 30.67, lng: 104.06 },
-            { name: '武汉', value: 420, students: 6300, lat: 30.52, lng: 114.31 },
-            { name: '杭州', value: 380, students: 5600, lat: 30.26, lng: 120.19 },
-            { name: '南京', value: 350, students: 5200, lat: 32.04, lng: 118.78 },
-            { name: '重庆', value: 320, students: 4700, lat: 29.59, lng: 106.54 },
-            { name: '济南', value: 280, students: 4200, lat: 36.65, lng: 117.00 },
-            { name: '西安', value: 260, students: 3800, lat: 34.27, lng: 108.95 },
-            { name: '厦门', value: 220, students: 3300, lat: 24.47, lng: 118.10 }
-        ],
-        subInstitutionData: [
-            { name: '北京', value: 850 }, { name: '上海', value: 720 },
-            { name: '广州', value: 680 }, { name: '深圳', value: 560 },
-            { name: '成都', value: 480 }, { name: '武汉', value: 420 },
-            { name: '杭州', value: 380 }, { name: '南京', value: 350 },
-            { name: '重庆', value: 320 }, { name: '济南', value: 280 },
-            { name: '西安', value: 260 }, { name: '厦门', value: 220 }
+            { name: '郴州', province: '湖南省', value: 683, students: 10240, lat: 25.77, lng: 113.02 },
+            { name: '衡阳', province: '湖南省', value: 565, students: 8468, lat: 26.89, lng: 112.57 },
+            { name: '益阳', province: '湖南省', value: 477, students: 7160, lat: 28.55, lng: 112.35 },
+            { name: '南昌', province: '江西省', value: 512, students: 7680, lat: 28.68, lng: 115.86 },
+            { name: '赣州', province: '江西省', value: 361, students: 5420, lat: 25.83, lng: 114.94 },
+            { name: '九江', province: '江西省', value: 218, students: 3264, lat: 29.71, lng: 115.99 },
+            { name: '北京', province: '北京市', value: 257, students: 3860, lat: 39.92, lng: 116.46 },
+            { name: '上海', province: '上海市', value: 216, students: 3240, lat: 31.22, lng: 121.48 },
+            { name: '广州', province: '广东省', value: 199, students: 2980, lat: 23.16, lng: 113.23 },
+            { name: '深圳', province: '广东省', value: 164, students: 2460, lat: 22.62, lng: 114.07 },
+            { name: '成都', province: '四川省', value: 139, students: 2080, lat: 30.67, lng: 104.06 },
+            { name: '武汉', province: '湖北省', value: 124, students: 1860, lat: 30.52, lng: 114.31 },
+            { name: '杭州', province: '浙江省', value: 108, students: 1620, lat: 30.26, lng: 120.19 },
+            { name: '南京', province: '江苏省', value: 99, students: 1480, lat: 32.04, lng: 118.78 },
+            { name: '重庆', province: '重庆市', value: 88, students: 1320, lat: 29.59, lng: 106.54 },
+            { name: '济南', province: '山东省', value: 79, students: 1180, lat: 36.65, lng: 117.00 },
+            { name: '西安', province: '陕西省', value: 71, students: 1060, lat: 34.27, lng: 108.95 },
+            { name: '厦门', province: '福建省', value: 39, students: 588, lat: 24.47, lng: 118.10 }
         ],
 
         // ==================== 15. 学员报名动态 ====================
         enrollDynamicList: [
-            { name: '张小明', province: '北京市', city: '朝阳', course: '养老护理员', progress: 65, time: '2026-05-29 14:30' },
-            { name: '李小红', province: '上海市', city: '浦东', course: '健康照护师', progress: 82, time: '2026-05-29 14:25' },
-            { name: '王大伟', province: '广东省', city: '深圳', course: '老年人评估师', progress: 45, time: '2026-05-29 14:20' },
-            { name: '赵小丽', province: '四川省', city: '成都', course: '营养配餐员', progress: 91, time: '2026-05-29 14:15' },
-            { name: '刘小强', province: '湖北省', city: '武汉', course: '养老护理员', progress: 33, time: '2026-05-29 14:10' },
-            { name: '陈小芳', province: '浙江省', city: '杭州', course: '健康照护师', progress: 77, time: '2026-05-29 14:05' },
-            { name: '杨小军', province: '江苏省', city: '南京', course: '老年人评估师', progress: 55, time: '2026-05-29 14:00' },
-            { name: '黄小燕', province: '重庆市', city: '渝中', course: '营养配餐员', progress: 28, time: '2026-05-29 13:55' },
-            { name: '周小华', province: '山东省', city: '济南', course: '养老护理员', progress: 95, time: '2026-05-29 13:50' },
-            { name: '吴小龙', province: '福建省', city: '厦门', course: '健康照护师', progress: 68, time: '2026-05-29 13:45' },
-            { name: '郑小芳', province: '陕西省', city: '西安', course: '养老护理员', progress: 42, time: '2026-05-29 13:40' },
-            { name: '孙大伟', province: '湖南省', city: '长沙', course: '老年人评估师', progress: 73, time: '2026-05-29 13:35' },
-            { name: '马小丽', province: '河南省', city: '郑州', course: '营养配餐员', progress: 88, time: '2026-05-29 13:30' },
-            { name: '朱小强', province: '辽宁省', city: '沈阳', course: '健康照护师', progress: 51, time: '2026-05-29 13:25' },
-            { name: '胡小芳', province: '安徽省', city: '合肥', course: '养老护理员', progress: 37, time: '2026-05-29 13:20' },
-            { name: '林小华', province: '江西省', city: '南昌', course: '老年人评估师', progress: 62, time: '2026-05-29 13:15' },
-            { name: '何小龙', province: '云南省', city: '昆明', course: '营养配餐员', progress: 93, time: '2026-05-29 13:10' },
-            { name: '郭小燕', province: '贵州省', city: '贵阳', course: '养老护理员', progress: 25, time: '2026-05-29 13:05' },
-            { name: '罗小华', province: '广西区', city: '南宁', course: '健康照护师', progress: 79, time: '2026-05-29 13:00' },
-            { name: '梁小强', province: '天津市', city: '和平', course: '老年人评估师', progress: 58, time: '2026-05-29 12:55' }
+            { name: '张小明', province: '湖南省', city: '长沙', course: '养老护理员', progress: 65, time: '2026-10-23 14:30' },
+            { name: '李小红', province: '湖南省', city: '郴州', course: '健康照护师', progress: 82, time: '2026-10-23 14:25' },
+            { name: '王大伟', province: '湖南省', city: '益阳', course: '老年人能力评估师', progress: 45, time: '2026-10-23 14:20' },
+            { name: '赵小丽', province: '湖南省', city: '株洲', course: '长期照护师', progress: 91, time: '2026-10-23 14:15' },
+            { name: '刘小强', province: '湖南省', city: '衡阳', course: '养老护理员', progress: 33, time: '2026-10-23 14:10' },
+            { name: '陈小芳', province: '湖南省', city: '岳阳', course: '健康照护师', progress: 77, time: '2026-10-22 14:05' },
+            { name: '杨小军', province: '湖南省', city: '常德', course: '老年人能力评估师', progress: 55, time: '2026-10-22 14:00' },
+            { name: '黄小燕', province: '湖南省', city: '娄底', course: '养老院长特修', progress: 28, time: '2026-10-22 13:55' },
+            { name: '周小华', province: '湖南省', city: '邵阳', course: '养老护理员', progress: 95, time: '2026-10-21 13:50' },
+            { name: '吴小龙', province: '湖南省', city: '湘潭', course: '医疗护理员', progress: 68, time: '2026-10-21 13:45' },
+            { name: '郑小芳', province: '湖南省', city: '怀化', course: '养老护理员', progress: 42, time: '2026-10-20 13:40' },
+            { name: '孙大伟', province: '湖南省', city: '长沙', course: '老年人能力评估师', progress: 73, time: '2026-10-20 13:35' },
+            { name: '马小丽', province: '湖南省', city: '永州', course: '长期照护师', progress: 88, time: '2026-10-19 13:30' },
+            { name: '朱小强', province: '湖南省', city: '郴州', course: '健康照护师', progress: 51, time: '2026-10-19 13:25' },
+            { name: '胡小芳', province: '湖南省', city: '益阳', course: '养老护理员', progress: 37, time: '2026-10-18 13:20' },
+            { name: '林小华', province: '湖南省', city: '常德', course: '医疗护理员', progress: 62, time: '2026-10-18 13:15' },
+            { name: '何小龙', province: '湖南省', city: '株洲', course: '长期照护师', progress: 93, time: '2026-10-17 13:10' },
+            { name: '郭小燕', province: '湖南省', city: '衡阳', course: '养老院长特修', progress: 25, time: '2026-10-17 13:05' },
+            { name: '罗小华', province: '湖南省', city: '岳阳', course: '健康照护师', progress: 79, time: '2026-10-16 13:00' },
+            { name: '梁小强', province: '湖南省', city: '邵阳', course: '老年人能力评估师', progress: 58, time: '2026-10-15 12:55' }
         ],
 
         // ==================== 16. 学员数量趋势 ====================
         studentGrowth: [
-            { month: '1月', value: 680 }, { month: '2月', value: 520 },
-            { month: '3月', value: 750 }, { month: '4月', value: 890 },
-            { month: '5月', value: 980 }, { month: '6月', value: 1150 }
+            { month: '5月', value: 980 }, { month: '6月', value: 1150 },
+            { month: '7月', value: 1320 }, { month: '8月', value: 1480 },
+            { month: '9月', value: 1620 }, { month: '10月', value: 1780 }
         ],
 
         // ==================== 17. 通过率趋势 ====================
         passRateTrendData: [
-            { month: '1月', rate: 85.2 }, { month: '2月', rate: 86.8 },
-            { month: '3月', rate: 88.5 }, { month: '4月', rate: 90.2 },
-            { month: '5月', rate: 91.8 }, { month: '6月', rate: 92.5 }
+            { month: '5月', rate: 91.3 }, { month: '6月', rate: 92.5 },
+            { month: '7月', rate: 93.6 }, { month: '8月', rate: 94.5 },
+            { month: '9月', rate: 94.8 }, { month: '10月', rate: 94.9 }
         ],
         examPassData: [
-            { type: '养老护理员', total: 320, pass: 296, rate: 92.5, lastRate: 90.2 },
-            { type: '老年人评估师', total: 210, pass: 198, rate: 94.2, lastRate: 91.8 },
-            { type: '健康照护师', total: 130, pass: 118, rate: 90.8, lastRate: 88.5 },
-            { type: '营养配餐员', total: 90, pass: 80, rate: 88.5, lastRate: 86.2 }
+            { type: '养老护理员', total: 320, pass: 309, rate: 96.6, lastRate: 96.1 },
+            { type: '老年人能力评估师', total: 210, pass: 200, rate: 95.2, lastRate: 94.8 },
+            { type: '健康照护师', total: 130, pass: 122, rate: 93.8, lastRate: 93.2 },
+            { type: '长期照护师', total: 90, pass: 84, rate: 93.3, lastRate: 92.6 }
         ],
         certificateData: {
             issued: 4856, monthNew: 236, validRate: 99.8,
-            byType: { '养老护理员证': 1856, '老年人评估师证': 1234, '健康照护师证': 986, '营养配餐员证': 780 }
+            byType: { '养老护理员证': 1856, '老年人能力评估师证': 1234, '健康照护师证': 986, '长期照护师证': 780 }
         },
         questionBankData: [
-            { type: '养老护理员', count: 3200, ratio: 25.4, correctRate: 78 },
-            { type: '老年人评估师', count: 2800, ratio: 22.3, correctRate: 76 },
-            { type: '健康照护师', count: 2500, ratio: 19.9, correctRate: 75 },
-            { type: '营养配餐员', count: 2200, ratio: 17.5, correctRate: 74 },
-            { type: '其他科目', count: 1880, ratio: 14.9, correctRate: 72 }
+            { type: '养老护理员', count: 21600, ratio: 26.2, correctRate: 78 },
+            { type: '老年人能力评估师', count: 18600, ratio: 22.5, correctRate: 76 },
+            { type: '健康照护师', count: 16400, ratio: 19.9, correctRate: 75 },
+            { type: '长期照护师', count: 13900, ratio: 16.8, correctRate: 74 },
+            { type: '医疗护理员', count: 12080, ratio: 14.6, correctRate: 72 }
         ],
 
         // ==================== 18. 最新资讯 ====================
         newsList: [
-            { title: '2026年养老行业职业技能培训新政策解读', tag: '政策解读', tagClass: 'policy', author: '管理员', date: '2026-05-29' },
-            { title: '养老护理员职业资格考试备考指南', tag: '备考指南', tagClass: 'guide', author: '讲师团队', date: '2026-05-28' },
-            { title: '叁竹培训新增健康照护师精品课程上线', tag: '平台公告', tagClass: 'announcement', author: '管理员', date: '2026-05-27' },
-            { title: '老年人能力评估师证书含金量再提升', tag: '行业动态', tagClass: 'industry', author: '编辑', date: '2026-05-26' },
-            { title: '在线学习平台新增错题本功能说明', tag: '功能更新', tagClass: 'update', author: '技术团队', date: '2026-05-25' }
+            { title: '2026年养老行业职业技能培训新政策解读', tag: '政策解读', tagClass: 'policy', author: '管理员', date: '2026-10-23' },
+            { title: '养老护理员职业资格考试备考指南', tag: '备考指南', tagClass: 'guide', author: '讲师团队', date: '2026-10-21' },
+            { title: '叁竹培训新增长期照护师精品课程上线', tag: '平台公告', tagClass: 'announcement', author: '管理员', date: '2026-10-18' },
+            { title: '老年人能力评估师证书含金量再提升', tag: '行业动态', tagClass: 'industry', author: '编辑', date: '2026-10-14' },
+            { title: '在线学习平台新增错题本功能说明', tag: '功能更新', tagClass: 'update', author: '技术团队', date: '2026-10-09' }
         ]
     };
 
     // ==================== 辅助计算函数 ====================
+    // 总部 + 分校，按学员数从高到低排序，统一补齐 orgName / city 字段
+    function getBranchList() {
+        return [D.headquarters].concat(D.mapData.map(function(i) {
+            return { orgName: '叁竹培训' + i.name + '分校', city: i.name, province: i.province, value: i.value, students: i.students };
+        })).sort(function(a, b) { return b.students - a.students; });
+    }
+
+    // 各省份学员占比（用于地图省份着色与占比展示）
+    function getProvinceShare() {
+        var list = getBranchList();
+        var total = list.reduce(function(s, i) { return s + i.students; }, 0);
+        var byName = {};
+        list.forEach(function(i) {
+            if (!byName[i.province]) byName[i.province] = 0;
+            byName[i.province] += i.students;
+        });
+        var arr = [];
+        for (var k in byName) arr.push({ name: k, value: byName[k], ratio: +(byName[k] / total * 100).toFixed(1) });
+        arr.sort(function(a, b) { return b.value - a.value; });
+        // t：相对最高占比省份的强度，用于地图着色
+        arr.forEach(function(i) { i.t = arr[0].ratio ? i.ratio / arr[0].ratio : 0; });
+        return arr;
+    }
+
+    // 学员占比 t(0~1) 映射到浅绿→深绿渐变，用于地图省份着色
+    function mixGreen(t) {
+        var ramp = ['#f0fdf4', '#bbf7d0', '#4ade80', '#16a34a', '#14532d'];
+        var i = Math.min(ramp.length - 1, Math.max(0, Math.round(t * (ramp.length - 1))));
+        return ramp[i];
+    }
+
     function calculatePassRate(examData) {
         var total = examData.reduce(function(s, i) { return s + i.total; }, 0);
         var ws = examData.reduce(function(s, i) { return s + i.total * i.rate; }, 0);
@@ -502,8 +537,8 @@
     function calculateKPIData() {
         return {
             institutions: D.kpiData.institutions,
-            subInstitutionCount: D.mapData.length,
-            totalStudents: D.mapData.reduce(function(s, i) { return s + i.students; }, 0),
+            subInstitutionCount: getBranchList().length,
+            totalStudents: getBranchList().reduce(function(s, i) { return s + i.students; }, 0),
             totalTeachers: D.kpiData.totalTeachers,
             totalCourses: D.courseCategories.reduce(function(s, i) { return s + i.value; }, 0),
             questionBankCount: D.kpiData.questionBankCount,
@@ -687,25 +722,58 @@
         });
     }
 
+    function loadMapLegend() {
+        var el = document.getElementById('mapLegend');
+        if (!el) return;
+        var share = getProvinceShare();
+        var html = '<div class="map-legend-item"><span class="map-legend-dot hq"></span>总部</div>'
+                 + '<div class="map-legend-item"><span class="map-legend-dot branch"></span>分支机构</div>';
+        // 只列湖南、江西两个重点省份，其余合并为“其他省份”，与业务口径一致
+        var top = share.slice(0, 2);
+        top.forEach(function(s) {
+            html += '<div class="map-legend-item" style="justify-content:space-between;min-width:128px;">'
+                  + '<span style="display:flex;align-items:center;gap:6px;"><span class="map-legend-dot" style="background:' + mixGreen(s.t) + ';"></span>' + s.name + '</span>'
+                  + '<span style="color:#2b6e3c;font-weight:600;">' + s.ratio.toFixed(1) + '%</span></div>';
+        });
+        // 用 100 减去前两项，避免逐省四舍五入累加产生的误差
+        var restRatio = +(100 - top.reduce(function(a, s) { return a + s.ratio; }, 0)).toFixed(1);
+        if (restRatio > 0) {
+            html += '<div class="map-legend-item" style="justify-content:space-between;min-width:128px;">'
+                  + '<span style="display:flex;align-items:center;gap:6px;"><span class="map-legend-dot" style="background:' + mixGreen(0.25) + ';"></span>其他省份</span>'
+                  + '<span style="color:#2b6e3c;font-weight:600;">' + restRatio.toFixed(1) + '%</span></div>';
+        }
+        el.innerHTML = html;
+    }
+
     function initMapChart() {
         var el = document.getElementById('chinaMap');
         if (!el) return;
         var c = echarts.init(el);
+        var share = getProvinceShare();
+        // 按省份学员占比给地图着色，深色代表学员更集中
+        var regions = share.map(function(s) {
+            return { name: s.name, itemStyle: { areaColor: mixGreen(s.t) }, emphasis: { itemStyle: { areaColor: '#fde68a', borderColor: '#22c55e' } } };
+        });
         c.setOption({
             tooltip: { trigger: 'item', backgroundColor: 'rgba(255,255,255,0.95)', borderColor: '#e2e8f0', borderWidth: 1, padding: [12,16], textStyle: { color: '#1e293b', fontSize: 13 },
-                formatter: function(p) { var d = p.data; return (d.orgName ? '<div style="font-weight:600;margin-bottom:4px;">' + d.orgName + '</div><div>所在城市: ' + d.city + '</div><div>学员数量: ' + (d.students || d.value).toLocaleString() + '人</div>' : '<div style="font-weight:600;margin-bottom:4px;">' + d.name + '</div><div>学员数量: ' + (d.students || d.value).toLocaleString() + '人</div>'); }
+                formatter: function(p) {
+                    var s = share.filter(function(i) { return i.name === p.name; })[0];
+                    if (p.data && p.data.orgName) return '<div style="font-weight:600;margin-bottom:4px;">' + p.data.orgName + '</div><div>所在城市: ' + p.data.city + '</div><div>学员数量: ' + p.data.students.toLocaleString() + '人</div>';
+                    if (s) return '<div style="font-weight:600;margin-bottom:4px;">' + p.name + '</div><div>学员数量: ' + s.value.toLocaleString() + '人</div><div>占比: ' + s.ratio + '%</div>';
+                    return '<div style="font-weight:600;margin-bottom:4px;">' + p.name + '</div><div>暂未设立分支机构</div>';
+                }
             },
-            geo: { map: 'china', roam: true, zoom: 1.2, label: { show: true, fontSize: 10, color: '#475569' }, itemStyle: { areaColor: '#f8fafc', borderColor: '#cbd5e1', borderWidth: 1 }, emphasis: { itemStyle: { areaColor: '#dcfce7', borderColor: '#22c55e' } } },
+            geo: { map: 'china', roam: true, zoom: 1.2, label: { show: true, fontSize: 10, color: '#475569' }, itemStyle: { areaColor: '#f8fafc', borderColor: '#cbd5e1', borderWidth: 1 }, emphasis: { itemStyle: { areaColor: '#fde68a', borderColor: '#22c55e' } }, regions: regions },
             series: [
-                { name: '分校分布', type: 'scatter', coordinateSystem: 'geo', symbolSize: function(v) { return Math.sqrt(v[2]) * 1.2; },
-                    itemStyle: { color: '#2b6e3c', shadowBlur: 8, shadowColor: 'rgba(43,110,60,0.5)' },
-                    data: D.mapData.map(function(i) { return { name: i.name + '分校', value: [i.lng, i.lat, i.value], city: i.name, orgName: '叁竹培训' + i.name + '分校', students: i.students }; })
+                { name: '分校分布', type: 'scatter', coordinateSystem: 'geo', symbolSize: function(v) { return Math.max(8, Math.sqrt(v[2]) * 1.2); },
+                    itemStyle: { color: '#2b6e3c', borderColor: '#fff', borderWidth: 1.5, shadowBlur: 8, shadowColor: 'rgba(43,110,60,0.5)' },
+                    data: D.mapData.map(function(i) { return { name: i.province, value: [i.lng, i.lat, i.value], city: i.name, orgName: '叁竹培训' + i.name + '分校', students: i.students }; })
                 },
                 { name: '总部', type: 'scatter', coordinateSystem: 'geo', symbolSize: 28,
                     label: { show: true, formatter: '总部', fontSize: 11, fontWeight: 'bold', color: '#dc2626' },
                     emphasis: { label: { show: true, formatter: '湖南长沙总部', fontSize: 12 } },
                     itemStyle: { color: '#dc2626', shadowBlur: 15, shadowColor: 'rgba(220,38,38,0.7)', borderColor: '#fff', borderWidth: 3 },
-                    data: [{ name: '湖南长沙总部', value: [112.94, 28.23], city: '长沙', orgName: '叁竹培训总部', students: 1500 }]
+                    data: [{ name: D.headquarters.province, value: [D.headquarters.lng, D.headquarters.lat, D.headquarters.value], city: D.headquarters.city, orgName: D.headquarters.orgName, students: D.headquarters.students }]
                 }
             ]
         });
@@ -745,6 +813,7 @@
         initPassRateChart();
         initOrderTrendChart();
         initMapChart();
+        loadMapLegend();
     }
 
     // ==================== 日期更新 ====================
@@ -765,20 +834,21 @@
 
         if (title === '机构人数') {
             chartId = 'modalPersonnelChart';
-            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">286</div><div class="modal-summary-label">总人数</div></div><div class="modal-summary-item"><div class="modal-summary-value">156</div><div class="modal-summary-label">讲师</div></div><div class="modal-summary-item"><div class="modal-summary-value">68</div><div class="modal-summary-label">管理员</div></div><div class="modal-summary-item"><div class="modal-summary-value">62</div><div class="modal-summary-label">其他</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>部门</th><th>人数</th><th>占比</th></tr></thead><tbody>';
+            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">208</div><div class="modal-summary-label">总人数</div></div><div class="modal-summary-item"><div class="modal-summary-value">126</div><div class="modal-summary-label">讲师</div></div><div class="modal-summary-item"><div class="modal-summary-value">28</div><div class="modal-summary-label">管理员</div></div><div class="modal-summary-item"><div class="modal-summary-value">54</div><div class="modal-summary-label">其他</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>部门</th><th>人数</th><th>占比</th></tr></thead><tbody>';
             var total = D.departmentData.reduce(function(s,i){return s+i.value;},0);
             D.departmentData.forEach(function(d) { content += '<tr><td>' + d.name + '</td><td>' + d.value + '</td><td>' + (d.value/total*100).toFixed(1) + '%</td></tr>'; });
             content += '</tbody></table>';
         } else if (title === '子机构个数') {
             chartId = 'branchChart';
-            var tStudents = D.mapData.reduce(function(s,i){return s+i.students;},0);
-            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">' + D.mapData.length + '</div><div class="modal-summary-label">子机构数</div></div><div class="modal-summary-item"><div class="modal-summary-value">' + tStudents.toLocaleString() + '</div><div class="modal-summary-label">总学员</div></div><div class="modal-summary-item"><div class="modal-summary-value">' + Math.round(tStudents/D.mapData.length).toLocaleString() + '</div><div class="modal-summary-label">平均学员</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>子机构</th><th>城市</th><th>学员数</th><th>状态</th></tr></thead><tbody>';
-            D.subInstitutionData.forEach(function(b) { content += '<tr><td>' + b.name + '分校</td><td>' + b.name + '</td><td>' + b.value + '</td><td>正常</td></tr>'; });
+            var branchList = getBranchList();
+            var tStudents = branchList.reduce(function(s,i){return s+i.students;},0);
+            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">' + branchList.length + '</div><div class="modal-summary-label">子机构数</div></div><div class="modal-summary-item"><div class="modal-summary-value">' + tStudents.toLocaleString() + '</div><div class="modal-summary-label">总学员</div></div><div class="modal-summary-item"><div class="modal-summary-value">' + Math.round(tStudents/branchList.length).toLocaleString() + '</div><div class="modal-summary-label">平均学员</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>子机构</th><th>所在城市</th><th>省份</th><th>学员数</th><th>状态</th></tr></thead><tbody>';
+            branchList.forEach(function(b) { content += '<tr><td>' + b.orgName + '</td><td>' + b.city + '</td><td>' + b.province + '</td><td>' + b.students.toLocaleString() + '</td><td>正常</td></tr>'; });
             content += '</tbody></table>';
         } else if (title === '学员总数') {
             chartId = 'studentChart';
             var kpiVals = calculateKPIData();
-            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">' + kpiVals.totalStudents.toLocaleString() + '</div><div class="modal-summary-label">总学员</div></div><div class="modal-summary-item"><div class="modal-summary-value">3,856</div><div class="modal-summary-label">已购课</div></div><div class="modal-summary-item"><div class="modal-summary-value">1,380</div><div class="modal-summary-label">在读</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>月份</th><th>新增学员</th><th>增长率</th></tr></thead><tbody>';
+            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">' + kpiVals.totalStudents.toLocaleString() + '</div><div class="modal-summary-label">总学员</div></div><div class="modal-summary-item"><div class="modal-summary-value">23,856</div><div class="modal-summary-label">已购课</div></div><div class="modal-summary-item"><div class="modal-summary-value">1,380</div><div class="modal-summary-label">在读</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>月份</th><th>新增学员</th><th>增长率</th></tr></thead><tbody>';
             var prev = 0;
             D.studentGrowth.forEach(function(g, i) {
                 var rate = i === 0 ? '-' : ((g.value - prev) / prev * 100).toFixed(1) + '%';
@@ -788,34 +858,35 @@
             content += '</tbody></table>';
         } else if (title === '讲师数量') {
             chartId = 'teacherChart';
-            content = '<div class="modal-summary"><div class="modal-summary-value">156</div><div class="modal-summary-label">讲师总数</div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>工种</th><th>讲师数</th><th>课程数</th></tr></thead><tbody>';
-            var teacherData = [{name:'养老护理员',teachers:68},{name:'老年人评估师',teachers:42},{name:'健康照护师',teachers:28},{name:'营养配餐员',teachers:18}];
-            teacherData.forEach(function(t, i) { content += '<tr><td>' + t.name + '</td><td>' + t.teachers + '</td><td>' + D.courseCategories[i].value + '</td></tr>'; });
+            content = '<div class="modal-summary"><div class="modal-summary-value">126</div><div class="modal-summary-label">讲师总数</div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>工种</th><th>讲师数</th><th>课程数</th></tr></thead><tbody>';
+            D.teacherDistribution.forEach(function(t, i) { content += '<tr><td>' + t.name + '</td><td>' + t.teachers + '</td><td>' + D.courseCategories[i].value + '</td></tr>'; });
             content += '</tbody></table>';
         } else if (title === '课程总数') {
             chartId = 'modalCourseChart';
-            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">288</div><div class="modal-summary-label">课程总数</div></div><div class="modal-summary-item"><div class="modal-summary-value">98</div><div class="modal-summary-label">养老护理员</div></div><div class="modal-summary-item"><div class="modal-summary-value">65</div><div class="modal-summary-label">老年人评估师</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>课程类型</th><th>课程数</th><th>学习人次</th><th>好评率</th></tr></thead><tbody>';
+            var ccTotal = D.courseCategories.reduce(function(s, c) { return s + c.value; }, 0);
+            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">' + ccTotal + '</div><div class="modal-summary-label">课程总数</div></div><div class="modal-summary-item"><div class="modal-summary-value">98</div><div class="modal-summary-label">养老护理员</div></div><div class="modal-summary-item"><div class="modal-summary-value">82</div><div class="modal-summary-label">老年人能力评估师</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>课程类型</th><th>课程数</th><th>学习人次</th><th>好评率</th></tr></thead><tbody>';
             D.courseCategories.forEach(function(c) { content += '<tr><td>' + c.name + '</td><td>' + c.value + '</td><td>' + c.students.toLocaleString() + '</td><td>' + c.rate + '%</td></tr>'; });
             content += '</tbody></table>';
         } else if (title === '题库总量') {
             chartId = 'questionChart';
-            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">12,580</div><div class="modal-summary-label">题库总量</div></div><div class="modal-summary-item"><div class="modal-summary-value">3,200</div><div class="modal-summary-label">养老护理员</div></div><div class="modal-summary-item"><div class="modal-summary-value">2,800</div><div class="modal-summary-label">老年人评估师</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>课程类型</th><th>题目数</th><th>占比</th><th>正确率</th></tr></thead><tbody>';
+            var qbTotal = D.questionBankData.reduce(function(s, q) { return s + q.count; }, 0);
+            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">' + qbTotal.toLocaleString() + '</div><div class="modal-summary-label">题库总量</div></div><div class="modal-summary-item"><div class="modal-summary-value">21,600</div><div class="modal-summary-label">养老护理员</div></div><div class="modal-summary-item"><div class="modal-summary-value">18,600</div><div class="modal-summary-label">老年人能力评估师</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>课程类型</th><th>题目数</th><th>占比</th><th>正确率</th></tr></thead><tbody>';
             D.questionBankData.forEach(function(q) { content += '<tr><td>' + q.type + '</td><td>' + q.count.toLocaleString() + '</td><td>' + q.ratio + '%</td><td>' + q.correctRate + '%</td></tr>'; });
             content += '</tbody></table>';
         } else if (title === '考试通过率') {
             chartId = 'modalPassRateChart';
-            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">92.5%</div><div class="modal-summary-label">总体通过率</div></div><div class="modal-summary-item"><div class="modal-summary-value">+3.2%</div><div class="modal-summary-label">环比增长</div></div><div class="modal-summary-item"><div class="modal-summary-value">4,856</div><div class="modal-summary-label">累计通过</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>工种</th><th>参考人数</th><th>通过人数</th><th>本次通过率</th><th>上月通过率</th></tr></thead><tbody>';
+            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">95.3%</div><div class="modal-summary-label">总体通过率</div></div><div class="modal-summary-item"><div class="modal-summary-value">+3.2%</div><div class="modal-summary-label">环比增长</div></div><div class="modal-summary-item"><div class="modal-summary-value">4,856</div><div class="modal-summary-label">累计通过</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>工种</th><th>参考人数</th><th>通过人数</th><th>本次通过率</th><th>上月通过率</th></tr></thead><tbody>';
             D.examPassData.forEach(function(e) { content += '<tr><td>' + e.type + '</td><td>' + e.total + '</td><td>' + e.pass + '</td><td>' + e.rate + '%</td><td>' + e.lastRate + '%</td></tr>'; });
             content += '</tbody></table>';
         } else if (title === '订单总数') {
             chartId = 'orderCountChart';
-            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">3,856</div><div class="modal-summary-label">总订单</div></div><div class="modal-summary-item"><div class="modal-summary-value">3,620</div><div class="modal-summary-label">已支付</div></div><div class="modal-summary-item"><div class="modal-summary-value">236</div><div class="modal-summary-label">待支付</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>月份</th><th>订单数</th><th>金额(万)</th></tr></thead><tbody>';
-            D.monthlyOrders.forEach(function(o) { content += '<tr><td>' + o.month + '</td><td>' + o.orders + '</td><td>' + (o.amount/10000).toFixed(1) + '</td></tr>'; });
+            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">23,856</div><div class="modal-summary-label">总订单</div></div><div class="modal-summary-item"><div class="modal-summary-value">22,420</div><div class="modal-summary-label">已支付</div></div><div class="modal-summary-item"><div class="modal-summary-value">1,436</div><div class="modal-summary-label">待支付</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>月份</th><th>订单数</th><th>金额(万)</th></tr></thead><tbody>';
+            D.monthlyOrders.forEach(function(o) { content += '<tr><td>' + o.month + '</td><td>' + o.orders.toLocaleString() + '</td><td>' + (o.amount/10000).toFixed(1) + '</td></tr>'; });
             content += '</tbody></table>';
         } else if (title === '订单金额' || title === '订单金额（万）') {
             chartId = 'orderAmountChart';
             var totalAmt = D.monthlyOrders.reduce(function(s,i){return s+i.amount;},0);
-            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">¥' + (totalAmt/10000).toFixed(1) + '万</div><div class="modal-summary-label">总金额</div></div><div class="modal-summary-item"><div class="modal-summary-value">¥67.7万</div><div class="modal-summary-label">本月</div></div><div class="modal-summary-item"><div class="modal-summary-value">+12.5%</div><div class="modal-summary-label">同比增长</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>课程类型</th><th>订单数</th><th>金额(万)</th><th>占比</th></tr></thead><tbody>';
+            content = '<div class="modal-summary"><div class="modal-summary-item"><div class="modal-summary-value">¥' + (totalAmt/10000).toFixed(1) + '万</div><div class="modal-summary-label">总金额</div></div><div class="modal-summary-item"><div class="modal-summary-value">¥271.2万</div><div class="modal-summary-label">本月</div></div><div class="modal-summary-item"><div class="modal-summary-value">+12.5%</div><div class="modal-summary-label">同比增长</div></div></div><div id="' + chartId + '" class="chart-box" style="height:250px;margin:20px 0;"></div><table class="modal-table"><thead><tr><th>课程类型</th><th>订单数</th><th>金额(万)</th><th>占比</th></tr></thead><tbody>';
             D.orderTypeData.forEach(function(o) { content += '<tr><td>' + o.type + '</td><td>' + o.orders.toLocaleString() + '</td><td>' + (o.amount/10000).toFixed(1) + '</td><td>' + o.ratio + '%</td></tr>'; });
             content += '</tbody></table>';
         } else {
@@ -835,15 +906,15 @@
         if (title === '机构人数') {
             c.setOption({ tooltip:{trigger:'axis'}, grid:{left:'3%',right:'4%',bottom:'3%',containLabel:true}, xAxis:{type:'category',data:D.departmentData.map(function(i){return i.name;}),axisLabel:{rotate:30,fontSize:11}}, yAxis:{type:'value'}, color:['#2b6e3c'], series:[{type:'bar',data:D.departmentData.map(function(i){return i.value;}),itemStyle:{borderRadius:[4,4,0,0]}}] });
         } else if (title === '子机构个数') {
-            c.setOption({ tooltip:{trigger:'axis'}, xAxis:{type:'category',data:D.subInstitutionData.map(function(i){return i.name;}),axisLabel:{rotate:45,fontSize:10}}, yAxis:{type:'value'}, color:['#2b6e3c'], series:[{type:'bar',data:D.subInstitutionData.map(function(i){return i.value;}),itemStyle:{borderRadius:[4,4,0,0]}}] });
+            c.setOption({ tooltip:{trigger:'axis'}, grid:{left:'3%',right:'4%',bottom:'3%',containLabel:true}, xAxis:{type:'category',data:getBranchList().map(function(i){return i.city;}),axisLabel:{rotate:45,fontSize:10}}, yAxis:{type:'value'}, color:['#2b6e3c'], series:[{type:'bar',data:getBranchList().map(function(i){return i.students;}),itemStyle:{borderRadius:[4,4,0,0]}}] });
         } else if (title === '学员总数') {
             c.setOption({ tooltip:{trigger:'axis'}, xAxis:{type:'category',data:D.studentGrowth.map(function(i){return i.month;})}, yAxis:{type:'value'}, color:['#2b6e3c'], series:[{type:'line',smooth:true,data:D.studentGrowth.map(function(i){return i.value;}),areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(43,110,60,0.3)'},{offset:1,color:'rgba(43,110,60,0.05)'}])}}] });
         } else if (title === '讲师数量') {
-            c.setOption({ tooltip:{trigger:'axis'}, xAxis:{type:'category',data:['养老护理员','老年人评估师','健康照护师','营养配餐员']}, yAxis:{type:'value'}, color:['#2b6e3c'], series:[{type:'bar',data:[68,42,28,18],itemStyle:{borderRadius:[4,4,0,0]}}] });
+            c.setOption({ tooltip:{trigger:'axis'}, grid:{left:'3%',right:'4%',bottom:'3%',containLabel:true}, xAxis:{type:'category',data:D.teacherDistribution.map(function(i){return i.name;}),axisLabel:{rotate:30,fontSize:10}}, yAxis:{type:'value'}, color:['#2b6e3c'], series:[{type:'bar',data:D.teacherDistribution.map(function(i){return i.teachers;}),itemStyle:{borderRadius:[4,4,0,0]}}] });
         } else if (title === '课程总数') {
-            c.setOption({ tooltip:{trigger:'item'}, color:['#2b6e3c','#4ade80','#86efac','#bbf7d0','#dcfce7'], series:[{type:'pie',radius:['40%','70%'],data:D.courseCategories.map(function(i){return{value:i.value,name:i.name};})}] });
+            c.setOption({ tooltip:{trigger:'item'}, color:['#2b6e3c','#4ade80','#86efac','#bbf7d0','#a7f3d0','#dcfce7'], series:[{type:'pie',radius:['40%','70%'],data:D.courseCategories.map(function(i){return{value:i.value,name:i.name};})}] });
         } else if (title === '题库总量') {
-            c.setOption({ tooltip:{trigger:'axis'}, xAxis:{type:'category',data:D.questionBankData.map(function(i){return i.type;}),axisLabel:{rotate:30,fontSize:10}}, yAxis:{type:'value'}, color:['#2b6e3c'], series:[{type:'bar',data:D.questionBankData.map(function(i){return i.count;}),itemStyle:{borderRadius:[4,4,0,0]}}] });
+            c.setOption({ tooltip:{trigger:'axis'}, grid:{left:'3%',right:'4%',bottom:'3%',containLabel:true}, xAxis:{type:'category',data:D.questionBankData.map(function(i){return i.type;}),axisLabel:{rotate:30,fontSize:10}}, yAxis:{type:'value'}, color:['#2b6e3c'], series:[{type:'bar',data:D.questionBankData.map(function(i){return i.count;}),itemStyle:{borderRadius:[4,4,0,0]}}] });
         } else if (title === '考试通过率') {
             c.setOption({ tooltip:{trigger:'axis'}, grid:{left:'3%',right:'4%',bottom:'3%',containLabel:true}, xAxis:{type:'category',data:D.examPassData.map(function(i){return i.type;}),axisLabel:{fontSize:11}}, yAxis:{type:'value',min:70,max:100,axisLabel:{fontSize:11,formatter:'{value}%'}}, color:['#2b6e3c','#4ade80','#86efac','#bbf7d0'], series:[{name:'本次',type:'bar',data:D.examPassData.map(function(i){return i.rate;}),itemStyle:{borderRadius:[4,4,0,0]}},{name:'上月',type:'bar',data:D.examPassData.map(function(i){return i.lastRate;}),itemStyle:{borderRadius:[4,4,0,0]}}] });
         } else if (title === '订单总数') {
@@ -863,7 +934,7 @@
     });
 
     // ==================== 数字动画 ====================
-    function animateNumber(el, target, duration, isMoney) {
+    function animateNumber(el, target, duration, isMoney, isRate, decimals) {
         duration = duration || 2000;
         var start = 0, startTime = performance.now();
         function update(ct) {
@@ -871,7 +942,8 @@
             var progress = Math.min(elapsed / duration, 1);
             var ease = 1 - Math.pow(1 - progress, 3);
             var current = start + (target - start) * ease;
-            if (isMoney) el.textContent = '¥' + current.toFixed(1);
+            if (isMoney) el.textContent = '¥' + current.toFixed(decimals || 1);
+            else if (isRate) el.textContent = current.toFixed(decimals || 1) + '%';
             else el.textContent = Math.floor(current).toLocaleString();
             if (progress < 1) requestAnimationFrame(update);
         }
@@ -881,11 +953,12 @@
     function animateNumbers() {
         var numbers = document.querySelectorAll('.kpi-number');
         var kpiVals = calculateKPIData();
-        var vals = [kpiVals.institutions, kpiVals.subInstitutionCount, kpiVals.totalStudents,
-                    kpiVals.totalTeachers, kpiVals.totalCourses, kpiVals.questionBankCount,
-                    kpiVals.examPassRate, kpiVals.totalOrders, kpiVals.totalAmount ? (kpiVals.totalAmount / 10000) : 285.6];
-        numbers.forEach(function(el, i) {
-            setTimeout(function() { animateNumber(el, vals[i] || 100, 2000, i === 8); }, i * 150);
+        D.kpiCards.forEach(function(card, i) {
+            var el = numbers[i];
+            if (!el) return;
+            var value = kpiVals[card.dataKey];
+            var target = card.isMoney ? value / 10000 : value;
+            setTimeout(function() { animateNumber(el, target, 2000, card.isMoney, card.isRate, card.decimals); }, i * 150);
         });
     }
 
